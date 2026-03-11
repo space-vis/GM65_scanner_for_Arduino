@@ -20,13 +20,16 @@ int *GM65_scanner::get_response()
 {
   static int buf[20];
   int count = 0;
-  if (mySerial->available() > 0) {
-    while (mySerial->available()) {
-      buf[count] = mySerial->read();
-      count++;
-    }
-    return buf;
+  unsigned long start = millis()
+  while (millis() - start < 500) { // wait up to 500 ms for response
+    if (mySerial->available() > 0) {
+      while (mySerial->available() && count < 20) {
+        buf[count++] = mySerial->read();
+      }
+      if count > 0 break; // break if a response was received
   }
+  buf[count] = -1; // put -1 at the end to signal end of response
+  return buf;
 }
 
 void GM65_scanner::clear_buffer()
@@ -42,9 +45,9 @@ void GM65_scanner::clear_buffer()
 void GM65_scanner::init()
 {
   mySerial->write(set_default, 9);
-  delay(10000);
+  delay(1500);
   mySerial->write(set_serial_output, 9);
-  delay(1000);
+  delay(200);
   //GM65_scanner::get_response();
   //GM65_scanner::clear_buffer();
 }
@@ -74,7 +77,8 @@ int GM65_scanner::get_mode(byte addr1, byte addr2)
   delay(1000);
   int *p;
   p = GM65_scanner::get_response();
-  return *(p + 4);
+  if p[0] == -1 return -1; // no response
+  return p[4];
 
 }
 
