@@ -85,7 +85,7 @@ int GM65_scanner::get_mode(byte addr1, byte addr2)
   delay(1000);
   int *p;
   p = GM65_scanner::get_response();
-  if p[0] == -1 return -1; // no response
+  if (p[0] == -1) return -1; // no response
   return p[4];
 
 }
