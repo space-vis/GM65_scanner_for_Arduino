@@ -27,7 +27,7 @@ int *GM65_scanner::get_response()
 {
   static int buf[20];
   int count = 0;
-  unsigned long start = millis()
+  unsigned long start = millis();
   while (millis() - start < 500) { // wait up to 500 ms for response
     if (mySerial->available() > 0) {
       while (mySerial->available() && count < 20) {
