@@ -96,7 +96,7 @@ void GM65_scanner::set_silent_mode(uint8_t silent_mode)
   int temp = ~(1ul << 6)&current_mode;
   byte mode_data;
   mode_data = temp + (silent_mode << 6);
-  char mode_command[9] = {0x7E, 0x00, 0x08, 0x01, 0x00, 0x00, mode_data, 0xAB, 0xCD};
+  uint8_t mode_command[9] = {0x7E, 0x00, 0x08, 0x01, 0x00, 0x00, mode_data, 0xAB, 0xCD};
   mySerial->write(mode_command, 9);
   //GM65_scanner::get_response();
   //GM65_scanner::clear_buffer();
@@ -108,7 +108,7 @@ void GM65_scanner::set_LED_mode(uint8_t LED_mode)
   int temp = ~(1ul << 7)&current_mode;
   byte mode_data;
   mode_data = temp + (LED_mode << 7);
-  char mode_command[9] = {0x7E, 0x00, 0x08, 0x01, 0x00, 0x00, mode_data, 0xAB, 0xCD};
+  uint8_t mode_command[9] = {0x7E, 0x00, 0x08, 0x01, 0x00, 0x00, mode_data, 0xAB, 0xCD};
   mySerial->write(mode_command, 9);
   //GM65_scanner::get_response();
   //GM65_scanner::clear_buffer();
@@ -121,7 +121,7 @@ void GM65_scanner::set_working_mode(uint8_t working_mode) //bit0-1
   int temp = ~(0b11ul)&current_mode;
   byte mode_data;
   mode_data = temp + working_mode;
-  char mode_command[9] = {0x7E, 0x00, 0x08, 0x01, 0x00, 0x00, mode_data, 0xAB, 0xCD};
+  uint8_t mode_command[9] = {0x7E, 0x00, 0x08, 0x01, 0x00, 0x00, mode_data, 0xAB, 0xCD};
   mySerial->write(mode_command, 9);
 }
 
@@ -131,7 +131,7 @@ void GM65_scanner::set_light_mode(uint8_t light_mode) //bit2-3
   int temp = ~(0b11ul << 2)&current_mode;
   byte mode_data;
   mode_data = temp + (light_mode << 2);
-  char mode_command[9] = {0x7E, 0x00, 0x08, 0x01, 0x00, 0x00, mode_data, 0xAB, 0xCD};
+  uint8_t mode_command[9] = {0x7E, 0x00, 0x08, 0x01, 0x00, 0x00, mode_data, 0xAB, 0xCD};
   mySerial->write(mode_command, 9);
 }
 
@@ -141,7 +141,7 @@ void GM65_scanner::set_aim_mode(uint8_t aim_mode) //bit4-5
   int temp = ~(0b11ul << 4)&current_mode;
   byte mode_data;
   mode_data = temp + (aim_mode << 4);
-  char mode_command[9] = {0x7E, 0x00, 0x08, 0x01, 0x00, 0x00, mode_data, 0xAB, 0xCD};
+  uint8_t mode_command[9] = {0x7E, 0x00, 0x08, 0x01, 0x00, 0x00, mode_data, 0xAB, 0xCD};
   mySerial->write(mode_command, 9);
 }
 
@@ -155,7 +155,7 @@ void GM65_scanner::set_sleep_mode(uint8_t sleep_mode){
   int temp = ~(0b1ul << 7)&current_mode;
   byte mode_data;
   mode_data = temp + (sleep_mode << 7);
-  char mode_command[9] = {0x7E, 0x00, 0x08, 0x01, 0x00, 0x07, mode_data, 0xAB, 0xCD};
+  uint8_t mode_command[9] = {0x7E, 0x00, 0x08, 0x01, 0x00, 0x07, mode_data, 0xAB, 0xCD};
   mySerial->write(mode_command, 9);
 
 }
