@@ -33,7 +33,7 @@ int *GM65_scanner::get_response()
       while (mySerial->available() && count < 20) {
         buf[count++] = mySerial->read();
       }
-      if count > 0 break; // break if a response was received
+      if (count > 0) break; // break if a response was received
     }
   }
   buf[count] = -1; // put -1 at the end to signal end of response
